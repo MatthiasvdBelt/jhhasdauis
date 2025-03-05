@@ -1,6 +1,6 @@
-from main import p
+from main import parser
 
 
 def get_m_parser():
-    print('returning', p)
-    return p
+    print('returning', parser)
+    return parser

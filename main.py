@@ -24,6 +24,14 @@ parser.add_argument(
     help="Start and end values"
 )
 
+parser.add_argument(
+    "--dest-simple",
+    type=int,
+    dest="server_port",
+    metavar="PORT",
+    help="Custom destination and metavar: server port number"
+)
+
 # files
 parser.add_argument(
     "simpleinputfile",
@@ -105,6 +113,13 @@ parser.add_argument(
     help="Exactly 3 strings."
 )
 
+parser.add_argument(
+    "--str-single-narg",
+    type=str,
+    nargs=1,
+    help="String wrapped in list via nargs=1"
+)
+
 
 # TODO
 # parser.add_argument(
@@ -161,13 +176,50 @@ parser.add_argument(
     help="Exactly 2 integers: start and end of range"
 )
 
+# Optional float
 parser.add_argument(
     "--float-optional",
     type=float,
     help="Optional float: learning rate"
 )
 
-# boolean flags #TODO
+# Float with default
+parser.add_argument(
+    "--float-optional-with-default",
+    type=float,
+    default=0.9,
+    help="Optional float with default: momentum (default: 0.9)"
+)
+
+parser.add_argument(
+    "--float-required-with-default",
+    type=float,
+    default=4.8,
+    help="aaa",
+    required=True
+)
+
+parser.add_argument(
+    "float-positional",
+    type=float,
+    default=1.2,
+    help="Optional float with default: momentum (default: 0.9)",
+)
+
+# boolean flags
+# Sets to True if present (default is False)
+parser.add_argument(
+    "--bool-test-true",
+    action="store_true",
+    help="Enable verbose output"
+)
+
+# Sets to False if present (default is True)
+parser.add_argument(
+    "--bool-test-store-false",
+    action="store_false",
+    help="Disable logging"
+)
 
 # choices  #TODO
 # parser.add_argument(

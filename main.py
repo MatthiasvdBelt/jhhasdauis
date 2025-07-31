@@ -10,6 +10,20 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("--version", action='version', version=f"obfuscation v3.2.81")
 
+# common things
+parser.add_argument(
+    "single-metavar",
+    metavar="jippie",
+    help="Single metavar test"
+)
+
+parser.add_argument(
+    "--multiple-metavar",
+    nargs=3,
+    metavar=("START", "MIDDLE", "END"),
+    help="Start and end values"
+)
+
 # files
 parser.add_argument(
     "simpleinputfile",
@@ -62,14 +76,96 @@ parser.add_argument(
     help="Required string: user login name"
 )
 
+parser.add_argument(
+    "--str-optional-default",
+    type=str,
+    default="KOPPAL",
+    help="Optional string with default string"
+)
 
-# metavar is just display name. so we should display that if it is present
+parser.add_argument(
+    "str-positional-query",
+    type=str,
+    help="Positional string: search query (required)"
+)
+
+parser.add_argument(
+    "str-positional-note_optional",
+    nargs="?",
+    type=str,
+    help="Optional positional string: note or comment"
+)
+
+# Exactly three strings
+parser.add_argument(
+    "--string-specific-number",
+    type=str,
+    nargs=3,
+    # metavar=("START", "END"),
+    help="Exactly 3 strings."
+)
+
+
+# TODO
 # parser.add_argument(
-#     "--input-path",
+#     "tags",
+#     nargs="*",
 #     type=str,
-#     metavar="FILENAME",
-#     help="File path, validated or opened manually later"
+#     help="Tags (zero or more values)"
 # )
+#
+# parser.add_argument(
+#     "keywords",
+#     nargs="+",
+#     type=str,
+#     help="Keywords (one or more values required)"
+# )
+
+parser.add_argument(
+    "--int-default-retries",
+    type=int,
+    default=3,
+    help="Optional int with default: retry count (default: 3)"
+)
+
+parser.add_argument(
+    "--int-required-timeout",
+    type=int,
+    required=True,
+    help="Required integer: timeout in seconds"
+)
+
+# Multiple integers (1 or more)
+parser.add_argument(
+    # this is a duplicate one on accident
+    "--int-nargs-plus",
+    type=int,
+    nargs="+",
+    help="List of nargs plus integers"
+)
+
+# Zero or more integers
+parser.add_argument(
+    "--int-zero-or-more",
+    type=int,
+    nargs="*",
+    help="Optional list of integers: score values (0 or more)"
+)
+
+# Exactly two integers
+parser.add_argument(
+    "--integers-specific-number",
+    type=int,
+    nargs=2,
+    metavar=("START", "END"),
+    help="Exactly 2 integers: start and end of range"
+)
+
+parser.add_argument(
+    "--float-optional",
+    type=float,
+    help="Optional float: learning rate"
+)
 
 # boolean flags #TODO
 

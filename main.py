@@ -221,7 +221,78 @@ parser.add_argument(
     help="Disable logging"
 )
 
-# choices  #TODO
+# mutually exclusive groups
+# boolean
+group = parser.add_mutually_exclusive_group()
+group.add_argument(
+    "--bool-mode-light",
+    action="store_true",
+    dest="light_mode",
+    help="Use light mode"
+)
+group.add_argument(
+    "--bool-mode-dark",
+    action="store_true",
+    dest="light_mode",
+    help="Use dark mode"
+)
+
+# more mutually exclusive groups?
+# TODO: we will do that later when we encounter one.
+
+# choices
+parser.add_argument(
+    "--simple-choice",
+    choices=["red", "green", "blue"],
+    help="Choose a color"
+)
+
+parser.add_argument(
+    "--simple-choice-required",
+    choices=["dev", "test", "prod"],
+    required=True,
+    help="Required: environment mode"
+)
+
+parser.add_argument(
+    "--choice-with-default",
+    choices=["low", "medium", "high", "ultra"],
+    default="medium",
+    help="Priority level (default: medium)"
+)
+
+parser.add_argument(
+    "--choice-int-code",
+    type=int,
+    choices=[100, 200, 404],
+    help="Integer status code"
+)
+
+parser.add_argument(
+    # also tests what happens if someone uses underscores instead of dashes
+    "--choice_int_code_with_default",
+    type=int,
+    choices=[101, 201, 408],
+    default=201,
+    help="Integer status code (default: 201)"
+)
+
+parser.add_argument(
+    "--choice-float-code",
+    type=float,
+    choices=[100.01, 200.01, 404.01],
+    help="Integer status code"
+)
+
+parser.add_argument(
+    # also tests what happens if someone uses underscores instead of dashes
+    "--choice_float_code_with_default",
+    type=float,
+    choices=[101.01, 201.01, 408.01],
+    default=201.01,
+    help="Integer status code (default: 201)"
+)
+
 # parser.add_argument(
 #     "--choice-file",
 #     type=str,

@@ -293,6 +293,83 @@ parser.add_argument(
     help="Integer status code (default: 201)"
 )
 
+# choices with nargs
+# Multiple string choices (at least one)
+parser.add_argument(
+    "--choice-one-or-more",
+    choices=["size", "speed", "color"],
+    nargs="+",
+    help="Enable one or more features"
+)
+
+parser.add_argument(
+    "--choice-zero-or-more",
+    choices=["x", "y", "z"],
+    nargs="*",
+    help="Zero or more options"
+)
+
+# choices positionals
+
+parser.add_argument(
+    "choice-positional",
+    choices=["admin", "user", "guest"],
+    help="Role (required positional)"
+)
+
+parser.add_argument(
+    # also tests if _ work instead of -
+    "choice_positional_0_or_more_with_default",
+    nargs="?",
+    choices=["json", "csv", "xml"],
+    default="json",
+    help="Optional output format (default: json)"
+)
+
+# subparsers
+subparsers = parser.add_subparsers(dest='subparsers', required=True, help="Available subcommands")
+
+
+init_parser = subparsers.add_parser("init", help="Initialize a project")
+init_parser.add_argument(
+    "init_project_name",
+    type=str,
+    help="Positional: project name"
+)
+
+init_parser.add_argument(
+    "--init-template",
+    type=str,
+    default="default",
+    help="Optional template name (default: 'default')"
+)
+
+build_parser = subparsers.add_parser("build", help="Build the project")
+build_parser.add_argument(
+    "--build-level",
+    type=int,
+    default=1,
+    help="Integer build level (default: 1)"
+)
+build_parser.add_argument(
+    "--build-verbose",
+    action="store_true",
+    help="Enable verbose build output"
+)
+
+deploy_parser = subparsers.add_parser("deploy", help="Deploy the project")
+deploy_parser.add_argument(
+    "--deploy-target",
+    choices=["staging", "production"],
+    required=True,
+    help="Required: target environment"
+)
+deploy_parser.add_argument(
+    "--deploy-force",
+    action="store_true",
+    help="Force deployment"
+)
+
 # parser.add_argument(
 #     "--choice-file",
 #     type=str,
